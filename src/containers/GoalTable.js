@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux';
 
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions';
 import GoalList from '../components/GoalList';
 
@@ -17,13 +17,13 @@ const mapStateToProps = (state: State) => {
   };
 };
 
-// const mapDispatchToProps = (dispatch: Dispatch) => {
-//   // return bindActionCreators(actionCreators, dispatch)
-// }
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return bindActionCreators(actionCreators, dispatch)
+}
 
 const connector: Connector<{}, Props> = connect(
   mapStateToProps,
-  // mapDispatchToProps
+  mapDispatchToProps
 )
 
-export default connector(GoalList)
+export default connector(GoalList);

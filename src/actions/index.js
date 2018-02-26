@@ -1,4 +1,9 @@
-export const addGoal = goal => {
+// @flow
+
+import type { Goal } from '../types/goals';
+import type { User } from '../types/user';
+
+export const addGoal = (goal: Goal) => {
   console.log("action add goal");
   return {
     type: 'ADD_GOAL',
@@ -8,7 +13,7 @@ export const addGoal = goal => {
   }
 }
 
-export const login = user => {
+export const login = (user : User) => {
   console.log("login");
   return {
     type: 'LOGIN',

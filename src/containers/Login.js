@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import * as actionCreators from '../actions';
+// import * as actionCreators from '../actions';
 import {login} from '../actions';
 
 import { reduxForm } from 'redux-form';
@@ -23,7 +23,6 @@ class LoginContainer extends Component<Props> {
   }
 
   login = values => {
-    const {dispatch} = this.props;
     let user = {
       username: values.username,
       password: values.password
