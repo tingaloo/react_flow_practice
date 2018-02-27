@@ -17,7 +17,7 @@ export type Props = {
   handleSubmit: (Function) => void,
 }
 
-console.log("another one");
+// console.log("another one");
 class LoginContainer extends Component<Props> {
   constructor() {
     super();
