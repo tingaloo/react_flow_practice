@@ -1,6 +1,6 @@
 // @flow
 
-import type { Goal } from '../types/goals';
+import type { Goal, Id } from '../types/goals';
 import type { User } from '../types/user';
 
 export const addGoal = (goal: Goal) => {
@@ -11,6 +11,14 @@ export const addGoal = (goal: Goal) => {
     l2: goal.l2,
     l3: goal.l3
   }
+}
+
+export const removeGoal = (id: Id) => {
+    console.log("remove goal");
+    return {
+      type: 'REMOVE_GOAL',
+      id
+    }
 }
 
 export const login = (user : User) => {

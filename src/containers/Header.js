@@ -6,7 +6,7 @@ import * as actionCreators from '../actions';
 import Header from '../components/Header';
 
 type Props = {
-  state: {}
+  // state: {}
 }
 const mapStateToProps = state => {
   return {

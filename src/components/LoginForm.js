@@ -8,6 +8,12 @@ type Props = {
   handleSubmit: (Function) => void,
   onSubmit: ({username: string, password: string}) => void,
 }
+//
+// const required = value => (value ? undefined : 'Required')
+// const alphaNumeric = value =>
+//   value && /[^a-zA-Z0-9 ]/i.test(value)
+//     ? 'Only alphanumeric characters'
+//     : undefined
 
 class LoginForm extends Component<Props> {
   render() {

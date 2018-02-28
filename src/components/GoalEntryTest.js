@@ -15,21 +15,21 @@ class GoalEntryForm extends Component {
     return(
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor="id">L1</label>
+          <label htmlFor="id">Level 1</label>
           <Field
             name="id"
             component="input"
             type="text" />
         </div>
         <div>
-          <label htmlFor="l2">L2</label>
+          <label htmlFor="l2">Level 2</label>
           <Field
             name="l2"
             component="input"
             type="text"/>
         </div>
         <div>
-          <label htmlFor="l2">L3</label>
+          <label htmlFor="l2">Level 3</label>
           <Field
             name="l3"
             component="input"

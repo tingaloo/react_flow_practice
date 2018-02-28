@@ -3,7 +3,8 @@
 import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
-import * as actionCreators from '../actions';
+// import * as actionCreators from '../actions';
+import { removeGoal } from '../actions';
 import GoalList from '../components/GoalList';
 
 import type { Connector } from 'react-redux';
@@ -18,7 +19,10 @@ const mapStateToProps = (state: State) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
-  return bindActionCreators(actionCreators, dispatch)
+  // inject ALL action creators from actions file.
+  // return { actions: bindActionCreators(actionCreators, dispatch) }
+  // injects select imported Actions
+  return bindActionCreators( {removeGoal}, dispatch);
 }
 
 const connector: Connector<{}, Props> = connect(

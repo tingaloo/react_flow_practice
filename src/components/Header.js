@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 
 const Header = ({ user }) => (
   <div>
-  Welcome {user.username} to demo app
+  <h1> This is the header</h1>
+  {user.username ? 'Welcome ' + user.username + "!" : `Please login with the form below`}
   </div>
 )
 

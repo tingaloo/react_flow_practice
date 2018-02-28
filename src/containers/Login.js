@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// import * as actionCreators from '../actions';
+import * as actionCreators from '../actions';
 import {login} from '../actions';
 
 import { reduxForm } from 'redux-form';
@@ -17,7 +17,6 @@ export type Props = {
   handleSubmit: (Function) => void,
 }
 
-console.log("another one");
 class LoginContainer extends Component<Props> {
   constructor() {
     super();
@@ -26,9 +25,9 @@ class LoginContainer extends Component<Props> {
   login = values => {
     let user = {
       username: values.username,
-      password: values.password
+      password: values.password,
     }
-    this.props.dispatch(login(user));
+    this.props.dispatch(actionCreators.login(user));
   }
 
   render() {

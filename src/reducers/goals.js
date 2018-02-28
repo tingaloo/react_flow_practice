@@ -1,7 +1,6 @@
 const goals = (state = [], action) => {
   switch (action.type) {
     case 'ADD_GOAL':
-    console.log(state);
       return [
         ...state,
         {
@@ -10,6 +9,8 @@ const goals = (state = [], action) => {
           l3: action.l3
         }
       ]
+    case 'REMOVE_GOAL':
+      return state.filter(({id})  => id != action.id)
     default:
       return state
   }
