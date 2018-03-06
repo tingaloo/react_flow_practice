@@ -8,6 +8,8 @@ import HeaderContainer from './containers/Header';
 
 import GoalTable from './containers/GoalTable';
 
+import Tree from './components/Tree'
+
 class App extends Component {
 
   render() {
@@ -25,6 +27,7 @@ class App extends Component {
         <LoginContainer />
         <GoalEntryContainer/>
         <GoalTable />
+        <Tree age={14}/>
       </div>
     );
   }
