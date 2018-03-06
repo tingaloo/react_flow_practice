@@ -1,19 +1,15 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
+import { Field } from 'redux-form';
 
+import PropTypes from 'prop-types';
+
+// using Flow
 type Props = {
   handleSubmit: (Function) => void,
   onSubmit: ({username: string, password: string}) => void,
 }
-//
-// const required = value => (value ? undefined : 'Required')
-// const alphaNumeric = value =>
-//   value && /[^a-zA-Z0-9 ]/i.test(value)
-//     ? 'Only alphanumeric characters'
-//     : undefined
 
 class LoginForm extends Component<Props> {
   render() {
@@ -38,6 +34,10 @@ class LoginForm extends Component<Props> {
       </form>
     )
   }
+}
+
+LoginForm.propTypes = {
+  handleSubmsfadsit: PropTypes.func.isRequired
 }
 
 export default LoginForm;
