@@ -1,24 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
+
+import PrivateRouteWithAuth from './containers/PrivateRouteWithAuth';
 import './App.css';
-import GoalEntryForm from './components/GoalEntryForm';
 import GoalEntryContainer from './components/GoalEntryTest';
-import LoginContainer from './containers/Login';
 import HeaderContainer from './containers/Header';
 
-import GoalTable from './containers/GoalTable';
+// import GoalTable from './containers/GoalTable';
+import Navbar from './components/Navbar';
 
-import Tree from './components/Tree'
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Tree from './pages/Tree';
+
+import JsonSchemaForm from './components/JsonSchemaForm';
 
 class App extends Component {
 
   render() {
     return (
-      <div className="App">
-      <HeaderContainer />
+      <Router>
+        <div>
+          <Navbar />
+          <HeaderContainer />
 
-        <Tree age={7}/>
-      </div>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/jsonschemaform" component={JsonSchemaForm} />
+          <Route exact path="/tree" onEnter={()=> console.log('entered')} component={Tree} />
+        </div>
+      </Router>
     );
   }
 }
@@ -27,7 +38,6 @@ class App extends Component {
 //   <p className="App-intro">
 //     To get started, edit <code>src/App.js</code> and save to reload.
 //   </p>
-//   <LoginContainer />
 //   <GoalEntryContainer/>
 //   <GoalTable />
 

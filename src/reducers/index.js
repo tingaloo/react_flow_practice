@@ -1,7 +1,7 @@
-import { createStore, combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form'
+import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import goals from './goals';
-import user from './user';
+import { loginError, loginLoading, user } from './user';
 
 
 const rootReducer = combineReducers({
@@ -10,7 +10,9 @@ const rootReducer = combineReducers({
   // for custom keys look up the docs for 'getFormState'
   form: formReducer,
   goals,
-  user
-})
+  loginError,
+  loginLoading,
+  user,
+});
 
-export default rootReducer
+export default rootReducer;

@@ -25,7 +25,7 @@ class LoginContainer extends Component<Props> {
   login = values => {
     let user = {
       username: values.username,
-      password: values.password,
+      password: values.password
     }
     this.props.dispatch(actionCreators.login(user));
   }
@@ -40,5 +40,5 @@ class LoginContainer extends Component<Props> {
 
 export default reduxForm({
   // a unique name for the form
-  form: 'loginForm',
+  form: 'loginForm'
 })(LoginContainer);

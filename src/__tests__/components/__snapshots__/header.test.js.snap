@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing with jest snapshots 1`] = `
+<div>
+  <h1>
+     Header 
+  </h1>
+  Welcome john
+</div>
+`;

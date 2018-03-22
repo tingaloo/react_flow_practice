@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
+import Mushroom from './Mushroom';
+
+const url =`https://picsum.photos/list`
 class Tree extends Component {
 
   // instanstiates props and describes local state.
   constructor(props) {
-    console.log("constructor called");
+    console.log("constructor");
     super(props);
-    // local dynamic variables.
+    // local dynamic variables and initial values
     this.state = {
       soilLevel: this.props.age/4,
       // fertilizer: 'brawn',
       age: this.props.age,
+      trunk: this.props.age,
       growthRate: 1,
       status: 'growing',
-      online: true
+      logs: 0,
+      online: false,
+
     }
   }
 
   // opinion: rarely needed, depends on individual design pattern.
   componentWillMount() {
-
+    // based on props, set local state based on that.
   }
 
   // componentDidMount fires AFTER render
@@ -27,11 +34,15 @@ class Tree extends Component {
     console.log("componentDidMount()");
     // fetch calls in vanilla react happen here
 
-    let growInterval = setInterval(
-      () => this.grow(),
-      1000
-    );
-    this.setState({ growInterval: growInterval })
+    // axios.get(url)
+    //   .then((response) => {
+    //     console.log(response.data[0].width);
+    //     if (response.data[0].width === 5616){
+          this.initializeTreeLifecycle();
+    //     }
+    //   })
+
+
 
   }
 
@@ -42,31 +53,54 @@ class Tree extends Component {
       return true;
   }
 
-  //
-  componentWillUpdate(){
-    // component
-  }
 
+
+  // run AFTER update
   componentDidUpdate() {
     // figure out why the component updated? is there a side effect forcing a rerender?
     // we find out here.
   }
 
+  // used for complex render scenarios
+  componentWillUpdate(nextProps, nextState){
+    // most useful for dispatching operations AFTER UPDATE
+  }
+
   componentWillUnmount() {
     // clear ALL intervals before leaving the page;
     clearInterval(this.state.growInterval);
+  }
 
+  initializeTreeLifecycle() {
+    let growInterval = setInterval(
+      () => this.grow(),
+      1000
+    );
+    this.setState({
+      growInterval: growInterval,
+      online: true
+    })
+  }
+
+  poison() {
+    console.log("mushroom poisoning");
+    this.setState({
+      growthRate: 0,
+      // age: 0,
+    })
   }
 
   grow() {
-    console.log('grow() called');
+    console.log('GROW() action called');
     this.setState({
-      age: this.state.age+(1 * this.state.growthRate),
+      age: this.state.age + 1,
+      trunk: this.state.trunk + (1 * this.state.growthRate),
       soilLevel : this.state.age/4
     })
   }
 
   toggleGrowth() {
+    console.log("toggle growth");
     if (this.state.status === 'growing') {
       this.setState({
         status: 'paused'
@@ -84,20 +118,19 @@ class Tree extends Component {
 
        })
     }
-    console.log('pausing growth');
-
   }
 
   trunk() {
     let trunk = []
-    for (let i = 0; i < this.state.age; i++) {
-      trunk.push(<div>| |</div>);
+
+    for (let i = 0; i < this.state.trunk; i++) {
+      trunk.push(<div>#@%%%%%:;;</div>);
     }
     return trunk;
   }
 
   addFertilizer(brand) {
-    if (brand === 'fish') {
+    if (brand === 'brauns') {
       console.log('setting growth rate')
       this.setState({
         growthRate: 2
@@ -105,33 +138,63 @@ class Tree extends Component {
     } else if (brand === 'poison') {
       this.setState({
         growthRate: 0,
-        age: 0,
-        soilLevel: this.state.growthRate/4
+        // age: 0,
       })
     }
-    clearInterval(this.state.growInterval);
-
   }
 
-
+  chop() {
+    this.setState({
+      logs: this.state.logs + this.state.trunk,
+      trunk: 0
+    })
+  }
 
 
   // choose what to render on the DOM, i.e divs and divs
   render() {
     console.log("RENDER");
+    if (!this.state.online) {
+      return (
+        <div>Tree isn't online for some reason.. </div>
+      )
+    }
     return (
       <div>
-      <h1> AGE: {this.state.age}</h1>
-      <h1> GROWTH RATE: {this.state.growthRate} </h1>
-      <h1> STATUS: {this.state.status} </h1>
-      <h1> SOIL LEVEL: {this.state.soilLevel} </h1>
+      <h2> AGE: {this.state.age}</h2>
+      <h2> GROWTH RATE: {this.state.growthRate} </h2>
+      <h2> STATUS: {this.state.status} </h2>
+      <h2> TRUNK SIZE: {this.state.trunk} </h2>
+      <h2> SOIL LEVEL: {this.state.soilLevel} </h2>
+      <h2> LOGS COLLECTED: {this.state.logs} </h2>
+      <div>
+      <button onClick={() => this.toggleGrowth()}>TOGGLE TIME</button>
+      <button onClick={() => this.addFertilizer('poison')}>Add Poison</button>
+      <button onClick={() => this.chop()}>CHOP</button>
+      <button onClick={() => this.addFertilizer('brauns')}>Add Braun's Fertilizer</button>
+      </div>
+      <div>
+      `:;%.    ;%%. %@;        %; ;@%;%'<br/>
+                    `:%;.  :;bd%;          %;@%;'<br/>
+                      `@%:.  :;%.         ;@@%;'<br/>
+                        `@%.  `;@%.      ;@@%;<br/>
+                          `@%%. `@%%    ;@@%;<br/>
+                            ;@%. :@%%  %@@%;       <br />
+                              %@bd%%%bd%%:; <br />
         {this.trunk()}
-        // \\<br/>
+        %@@@%(o);  . '<br />
+                                %@@@o%;:(.,'<br />
+                            `.. %@@@o%::;<br />
+                               `)@@@o%::;<br />
+                                %@@(o)::;<br />
+                               .%@@@@%::;<br />
+                               ;%@@@@%::;.<br />
+                              ;%@@@@%%:;;;.<br />
+                          ...;%@@@@@%%:;;;;,..
+        </div>
+                          <Mushroom age={1} treeAge={this.state.age} poison={() => this.poison()} />
 
-        <button onClick={() => this.toggleGrowth()}>TOGGLE GROWTH</button>
-        <button onClick={() => this.addFertilizer('poison')}>Add Poison</button>
 
-        <button onClick={() => this.addFertilizer('fish')}>Add fish</button>
       </div>
     )
   }

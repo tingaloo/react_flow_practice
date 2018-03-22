@@ -8,19 +8,20 @@ import Header from '../components/Header';
 type Props = {
   // state: {}
 }
-const mapStateToProps = state => {
-  return {
-    user: state.user
-  }
-}
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(actionCreators, dispatch)
-}
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    loading: state.loginLoading,
+    error: state.loginError,
+  };
+};
+
+const mapDispatchToProps = dispatch => bindActionCreators(actionCreators, dispatch);
 
 const HeaderContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
-)(Header)
+  mapDispatchToProps,
+)(Header);
 
 export default HeaderContainer;

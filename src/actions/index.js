@@ -2,9 +2,9 @@
 
 import type { Goal, Id } from '../types/goals';
 import type { User } from '../types/user';
+import axios from 'axios';
 
 export const addGoal = (goal: Goal) => {
-  console.log("action add goal");
   return {
     type: 'ADD_GOAL',
     id: goal.id,
@@ -14,18 +14,50 @@ export const addGoal = (goal: Goal) => {
 }
 
 export const removeGoal = (id: Id) => {
-    console.log("remove goal");
     return {
       type: 'REMOVE_GOAL',
       id
     }
 }
 
-export const login = (user : User) => {
-  console.log("login");
-  return {
-    type: 'LOGIN',
-    username: user.username,
-    password: user.password
-  }
+export function loginError(bool) {
+    return {
+        type: 'LOGIN_ERROR',
+        hasError: bool
+    };
 }
+
+export function loginLoading(bool) {
+    return {
+        type: 'LOGIN_LOADING',
+        isLoading: bool
+    };
+}
+
+export function loginSuccess(user : User) {
+    return {
+        type: 'LOGIN_SUCCESS',
+        username: user.username,
+        password: user.password
+    };
+}
+
+
+export function login(user : User) {
+        return dispatch => {
+          const url = 'http://jsonplaceholder.typicode.com/posts';
+            dispatch(loginLoading(true));
+
+            return axios.get(url)
+                .then((response) => {
+                    if (response.status !== 200) {
+                        throw Error(response.statusText);
+                    }
+
+                    dispatch(loginLoading(false));
+                    return response;
+                })
+                .then((response) => dispatch(loginSuccess(user)))
+                .catch(() => dispatch(loginError(true)));
+        };
+    }

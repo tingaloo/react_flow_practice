@@ -7,7 +7,9 @@ describe('root reducer', () => {
     expect(reducer({}, { type: '@@INIT' })).toEqual({
       "form": {},
       "goals": [],
+      "loginError": false,
+      "loginLoading": false,
       "user": {},
-    })
+  })
   });
 })
